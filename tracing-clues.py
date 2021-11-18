@@ -7,8 +7,8 @@ from graph_lib.neo4jConnection import Neo4jConnection
 
 
 def main():
-    start_date = parser.parse("October 1, 2005").date()
-    end_date = parser.parse("December 1, 2005").date()
+    start_date = parser.parse("January 1, 2002").date()
+    end_date = parser.parse("October 1, 2021").date()
 
     print("Scrapping Orca Network for dates from {} to {}".format(start_date, end_date))
     map_date_to_reports = OrcaNetworkScraper.scrap_archival(start_date, end_date)
@@ -20,7 +20,7 @@ def main():
 
     print("Creating Reports")
     try:
-       # create_date_and_report(connection, map_date_to_reports)
+       create_date_and_report(connection, map_date_to_reports)
     except Exception as e:
         print("Query failed:", e)
         print("\tuh oh... connection not made")
