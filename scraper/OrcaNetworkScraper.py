@@ -39,6 +39,8 @@ def scrap_archival_page(archival_date):
     pattern = r"<br>||</br>"
     cleanUpDiv = re.sub(pattern, "", divTag.getText())
     textOnly = re.sub('\n', ' ', cleanUpDiv)
+    textOnly = re.sub("'", "\'", textOnly)
+    textOnly = re.sub('"', '\\"', textOnly)
     textOnly = re.sub(
         'Clip Map to enlarge    Map © 2005 used with permission byAdvanced Satellite Productions, Inc.', '',
         textOnly)
