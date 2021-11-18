@@ -12,7 +12,8 @@ def add_time_line(connection, curr_date):
                 MERGE (y:Year {date: '%s'})
                 MERGE (m:Month {date: '%s', month: '%s', number: %d})
                 MERGE (d:Day {date: '%s', weekday: '%s', number: %d})
-                CREATE (d)-[:DAY_IN]->(m)-[:MONTH_IN]->(y)
+                MERGE (d)-[:DAY_IN]->(m)
+                MERGE (m)-[:MONTH_IN]->(y)
              ''' % (year, year_month, month, month_number, full_date, day_name, day)
     connection.query(query)
 
@@ -22,7 +23,7 @@ def add_report(connection, date, report):
     query = '''
                 MATCH (d:Day {date: '%s'})
                 MERGE (s:Sighting {full_text: "%s", processed: 'no'})
-                CREATE (s)-[:ON]->(d)
+                MERGE (s)-[:ON]->(d)
             ''' % (full_date, report)
     connection.query(query)
 
