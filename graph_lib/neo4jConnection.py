@@ -1,4 +1,5 @@
 '''Code from https://towardsdatascience.com/create-a-graph-database-in-neo4j-using-python-4172d40f89c4'''
+from neo4j import GraphDatabase
 
 class Neo4jConnection:
 
@@ -25,7 +26,5 @@ class Neo4jConnection:
             response = list(session.run(query, parameters))
         except Exception as e:
             print("Query failed:", e)
-        finally:
-            if session is not None:
-                session.close()
+
         return response
