@@ -1,0 +1,83 @@
+orca, orca_name, gender, birth_date, mother, mother_name, orca_status, location_found, date, age
+L60, Rascal, Female, None, None, None, washed up, outer WA coast, May 2002, 30
+L47, Marina, Female, 1974, None, None, missing, None, September 2021 , 47 
+K21, Cappuccino, Male, 1986, K18, None, missing, None, "July 29, 2021" , 35
+L41, Mega, Male, 1977, L11, None, missing, None, "January 28, 2020", 42,
+L84, Nyssa, Male, 1990, L51, missing, None,"August 6, 2019 ", 29
+K25, Scoter, Male, 1991, K13, missing, None,"August 6, 2019" , 28
+J17, PrincessAngeline, Female, 1977, J5, None, missing,None, "August 6, 2019", 42, 
+J50, Scarlet, Female, December 2014, J16, Slick, missing, None, "Sept 13, 2018", 3
+L92, Crewser, Male, 1995, L60, Rascal, missing, None, June, 2018 , 23
+J52, Sonic, Male, March 2015, J36, Alki, missing, None, Sept. 2017,2
+K13, Skagit, Female, 1972, None, None, missing, None, Winter 2017 , 45
+J2, Granny, Female, 1911, None, None, missing, None, Jan. 2017, 105,
+J34, Doublestuf, Male, 1998, J22, Oreo, None,found deceased, None, "Dec. 20, 2016" , 18
+J54, Dipper, Male, December 2015, J28, Polaris, missing, None, Oct. 2016 , 10m
+J28, Polaris, Female, 1993, J17, Princess Angeline, missing, None, Oct. 2016 , 23,
+J14, Samish, Female, 1974, J12, None, missing, None, August 2016 , 42
+L95, Nigel, Male, 1996, L43, Jellyroll, found deceased, None, "March 30, 2016" , 20, 
+J55, None, None, Jan. 2016, [J14 J37 J40], None, missing, None, "January 19, 2016", 0
+L27, Ophelia, Female, 1965 ,None, None, missing, None, Summer 2015 , 50,
+J32, Rhapsody, Female, 1996, J20, None, found deceased with fetus, None, "Dec. 4, 2014" , 18
+L120,None, None, Sept. 2014, L86, Surprise!, missing, None, "Oct. 17, 2014" , 1m
+L53, Lulu, Female, 1977, L7, Canuck, missing, None, Summer 2014, 37
+L100, Indigo, Male, 2001, L54, Ino, missing, None, Summer 2014,13
+J8, Speiden, Female, 1933, None, missing, None, Fall 2013, 80
+L79, Skana, Male, 1989, L22, Spirit, missing,None, Summer 2013, 24
+L26, Baba, Female, 1956, None, None, missing, None, Spring 2013, 57
+L2, Grace, Female, 1960, None, None, missing,None, Fall 2012 , 52, 
+L78, Gaia, Male, 1989, L2, Grace, missing, None, Summer 2012 , 23
+K40, Raggedy, Female, 1963, K18, Kiska, missing, None, Spring 2012 , 49
+L5, Tanya, Female, 1964, None, missing, None, Spring 2012 , 48
+L12, Alexis, Female, 1933, None, missing, None, Spring 2012 , 79
+J30, Riptide, Male, None, J14, Samish, missing, None, 2012 , 16 
+L112, Viria/Sooke, None, Feb. 2009, L86, None, found deceased, "shoreline of Long Beach, WA" ,"Feb. 11, 2012", 3
+J48,None, None, Dec. 2011, J16, Slick, missing, None, Jan. 2012 , 1m
+J1, Ruffles, Male, 1951, None, None, missing, None, Nov. 2010 , 59
+L7, Canuck, Female, 1961, None, None, missing, None,Sept. 2010, 49
+J33, Keet, Male, 1996, J16, Slick, missing, None, August 2010 , 14
+K11, Georgia, Female, 1933, None, None, missing, None, June 2010 , 77
+L114,None, None, 2010, L77, Matia, missing, None, June 2010, 4m
+L73, Flash, Male, 1986, L5, Tanya, missing, None, May 2010 , 24
+L74, Saanich, Male, 1986, L3, Oreana, missing, None, Winter 2010 , 23
+L57, Faith, Male, 1977, L45, Asterix, missing, None, Nov. 2008 , 31
+L67, Splash, Female, 1985, L2, Grace, missing, None, Sept. 2008 , 23
+L111,None, Female, "Aug. 12, 2008", L47, Marina, missing, None, Aug. 2008 , 0
+J11, Blossom, Female, 1972, J4, None missing, None, July 2008 , 36,
+L21, Ankh, Female, 1950, None, None, missing, None, summer 2008 , 58
+L101, Aurora, Male, 2002, L67, Splash, missing, None, summer 2008 , 6, 
+K7, Lummi, Female, 1910, None None missing, None, spring 2008, 98
+J43,None, None, "November 2007", J14, Samish, missing, None, April 2008, 5m
+L104,None, None, Oct. 2004, L43, Jelly Roll, missing, None, June 2007 , 2,
+K41,None, None, Nov. 2006, K22, Sekiu,missing,None, Dec. 2006 , 4m
+K39,None, None, Sept. 2006, K28, Raven, missing, None, Oct. 21, 2006 , 4m
+K28, Raven, Female, None, K12, Sequim,, last seen, None, "Sept. 19, 2006" , 12
+L43, Jellyroll, Female, 1972, None, None, last seen, None, "Sept. 2, 2006", 34
+L71, Hugo, Male, None, L26, Baba, missing, None, summer 2006 , 20
+L98, Luna, Male, 1999, L67, Splash, died, "Nootka Sound, BC", "March 10, 2006" , 7
+K31, Tosh,, Male, 1999, K12, Sequim, missing, None, Oct. 2006 , 7
+L32, Olympia, Female, 1955, None, None, missing, summer 2005 , 50
+L107,None, None, June, 2005, L47, Marina, missing, None, summer 2005, 0
+K18, Kiska, Female, 1948, None, None, missing, None, December 2003 , 55
+L58, Sparky, None, 1980, L5, Tanya, missing, None, June 2003 , 23
+L3, Oreana, Female, 1950,None, None, missing, None, 2002 , 53, 
+L102,None, None, "November 2002", L47, Marina, missing, None, "Dec. 3, 2002" , 1m
+L60, Rascal, Female, 1972, None, None, washed up, outer WA coast, May 2002, 30
+K32,None, None, 2000, K16, Opus, last seen, None, 2001, 0
+L99,None, None, 2000, L47, Marina, last seen,None, 2001, 0
+L62, Cetus, Male, 1980, L27, Ophelia, last seen,None, 2000 , 20 
+L39, Orcan, Male, 1975, L2, Grace, last seen,None, 2000, 25
+L11, Squirty, Female, 1957, None, None, last seen,None, 2000, 43
+L1, Oskar, Male, 1959, None, None, last seen,None, 2000 , 41
+J18, Everett, Male, 1977, J10, Tahoma, found deceased, "Tsawassen, Canada", March 2000 , 23
+J10, Tahoma, Female, 1962, None, None, last seen, None, 1999 , 37
+K4, Morgan, Female, 1933, None, None, last seen,None, 1999 , 66
+L97,None, None, 1999, L51, Nootka, died, None, Oct. 1999, 0
+L51, Nootka, Female, 1973, None, None, found deceased, "Race Rocks, Canada", September 1999, 26
+J11,None, None, Dec. 1998, J11, Blossom, died, None, Dec. 1998, 0
+L93, Nerka, Female, 1995, L27, Ophelia, last seen, None,1998, 3
+L38, Dylan, Male, 1965, last seen, None, 1998, 33
+L44, Leo, Male, 1974, L32, Olympia, last seen, None, 1998 , 24
+K3, Sounder, Female, 1954, None, None, last seen, None, 1998, 44
+J20, Ewok, Female, 1981, J10, Tahoma, last seen, None, 1998, 17
+J6, Ralph, Male, 1956 , None, None, last seen, None, 1998, 42
