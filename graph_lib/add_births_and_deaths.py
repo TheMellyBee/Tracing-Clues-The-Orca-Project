@@ -69,8 +69,11 @@ def import_pod_birth(connection, pod_name):
                             MERGE (%s:Orca {name:'%s', gender:'%s'})
                             MERGE (b%s:Birth :Event {baby:'%s'})
                             MERGE (y%s:Year {date:'%s'})
-                            MERGE (y%s)<-[:ON]-(b%s)-[:CALF]->(%s)-[:MEMBER_OF]-(%s)
-                         """ % (row['name'], row['name'], row['sex'],row['name'], row['name'], row['name'], row['DOB'], row['name'],row['name'], row['name'], pod_name)
+                            MERGE (y%s)<-[:ON]-(b%s)
+                            MERGE (b%s)-[:CALF]->(%s)
+                            MERGE (%s)-[:MEMBER_OF]-(%s)
+                            
+                         """ % (row['name'], row['name'], row['sex'],row['name'], row['name'], row['name'], row['DOB'], row['name'],row['name'], row['name'],row['name'], row['name'], pod_name)
 
     print("Pod query built.")
 
