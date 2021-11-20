@@ -29,7 +29,7 @@ def __create_birth_query_from_row(connection, index, row):
         query_builder += "SET c.gender = '%s'\n" % (row['gender'].strip())
 
     # Create birth event
-    query_builder += "CREATE (be:Birth :Event)\n"
+    query_builder += "MERGE (be:Birth :Event {baby:'%s'})\n"%(index)
 
     # Get the mother
     query_builder += "MERGE (m:Orca {name:'%s', gender:'Female'})\n" % (row['mother'].strip())
@@ -46,7 +46,7 @@ def __create_birth_query_from_row(connection, index, row):
 
     # Make the relationships
     query_builder += "MERGE (m)-[:CALVES {calf_number:%d}]->(be)\n" % (int(row['calf_number']))
-    query_builder += "MERGE  (d)<-[:BORN_ON]-(be)-[:CALF]->(c)"
+    query_builder += "MERGE  (d)<-[:ON]-(be)-[:CALF]->(c)"
 
     connection.query(query_builder)
 
@@ -67,10 +67,10 @@ def import_pod_birth(connection, pod_name):
     for index, row in pod_birth_df.iterrows():
         query_builder += """
                             MERGE (%s:Orca {name:'%s', gender:'%s'})
-                            CREATE (b%s:Birth :Event)
+                            MERGE (b%s:Birth :Event {baby:'%s'})
                             MERGE (y%s:Year {date:'%s'})
-                            MERGE (y%s)<-[:BORN_ON]-(b%s)-[:CALF]->(%s)-[:MEMBER_OF]-(%s)
-                         """ % (row['name'], row['name'], row['sex'],row['name'], row['name'], row['DOB'], row['name'],row['name'], row['name'], pod_name)
+                            MERGE (y%s)<-[:ON]-(b%s)-[:CALF]->(%s)-[:MEMBER_OF]-(%s)
+                         """ % (row['name'], row['name'], row['sex'],row['name'], row['name'], row['name'], row['DOB'], row['name'],row['name'], row['name'], pod_name)
 
     print("Pod query built.")
 
@@ -122,7 +122,7 @@ def __create_death_query_from_row(connection, index, row):
     query_builder += 'WITH o\n'
 
     # Create a birth event
-    query_builder += "CREATE (be:Birth :Event)\n"
+    query_builder += "MERGE (be:Birth :Event {baby:'%s'})\n"%(index)
     query_builder += "MERGE (o)<-[:CALF]-(be)\n"
 
     # Create/Match Mother
@@ -143,15 +143,15 @@ def __create_death_query_from_row(connection, index, row):
             add_time_line(connection, birth_date)
             query_builder += "WITH be, o\n"
             query_builder += "MATCH (d:Day {date: '%s'})\n" % (birth_date.strftime("%B %d, %Y"))
-        query_builder += "MERGE (be)-[:BORN_ON]->(d)\n"
+        query_builder += "MERGE (be)-[:ON]->(d)\n"
 
     # Create death event with added label
     if 'found' in row['orca_status'] or 'washed' in row['orca_status']:
-        query_builder += "MERGE (de:Death :Event :FoundDead {status:'%s', reported_age:'%s'})\n" % (row['orca_status'], row['age'])
+        query_builder += "MERGE (de:Death :Event :FoundDead {id: '%s', status:'%s', reported_age:'%s'})\n" % (index,row['orca_status'], row['age'])
     elif 'missing' in row['orca_status'] or 'last seen' in row['orca_status']:
-        query_builder += "MERGE (de:Death :Event :Missing {status:'%s', reported_age:'%s'})\n" % (row['orca_status'], row['age'])
+        query_builder += "MERGE (de:Death :Event :Missing {id: '%s',status:'%s', reported_age:'%s'})\n" % (index,row['orca_status'], row['age'])
     else:
-        query_builder += "MERGE (de:Death :Event {status:'%s', reported_age:'%s'})\n" % (row['orca_status'], row['age'])
+        query_builder += "MERGE (de:Death :Event {id: '%s',status:'%s', reported_age:'%s'})\n" % (index,row['orca_status'], row['age'])
     query_builder += "MERGE (o)-[:DIED]->(de)\n"
 
     # create death date
