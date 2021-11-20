@@ -29,7 +29,7 @@ def __create_birth_query_from_row(connection, index, row):
         query_builder += "SET c.gender = '%s'\n" % (row['gender'].strip())
 
     # Create birth event
-    query_builder += "MERGE (be:Birth :Event)\n"
+    query_builder += "CREATE (be:Birth :Event)\n"
 
     # Get the mother
     query_builder += "MERGE (m:Orca {name:'%s', gender:'Female'})\n" % (row['mother'].strip())
