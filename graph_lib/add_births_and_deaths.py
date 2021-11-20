@@ -133,7 +133,7 @@ def __create_death_query_from_row(connection, index, row):
         query_builder += "MERGE (m:Orca {name:'%s', gender:'Female'})\n" % (row['mother'].strip())
         if row['mother_name'] != "None":
             query_builder += "SET m.nick_name = '%s'\n" % (row['mother_name'].strip())
-            query_builder += 'WITH o, m\n'
+            query_builder += 'WITH o, m, be\n'
         query_builder += "MERGE (m)-[:CALVES]->(be)\n"
 
     # Add birthdate
