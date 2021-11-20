@@ -16,7 +16,7 @@ J54,Dipper,Male,December 2015,J28,Polaris,missing,None,Oct 2016,10m
 J28,Polaris,Female,1993,J17,Princess Angeline,missing,None,Oct 2016,23
 J14,Samish,Female,1974,J12,None,missing,None,August 2016,42
 L95,Nigel,Male,1996,L43,Jelly Roll,found deceased,None,March 30 2016,20
-J55,None,None,Jan2016,[J14J37J40],None,missing,None,January 19 2016,0
+J55,None,None,Jan2016,None,None,missing,None,January 19 2016,0
 L27,Ophelia,Female,1965,None,None,missing,None,July 2015,50
 J32,Rhapsody,Female,1996,J20,None,found deceased with fetus,None,Dec 4 2014,18
 L120,None,None,Sept 2014,L86,Surprise!,missing,None,Oct 17 2014,1m
@@ -74,7 +74,7 @@ J10,Tahoma,Female,1962,None,None,last seen,None,1999,37
 K4,Morgan,Female,1933,None,None,last seen,None,1999,66
 L97,None,None,1999,L51,Nootka,died,None,Oct 1999,0
 L51,Nootka,Female,1973,None,None,found deceased,Race Rocks Canada,September 1999,26
-J11,None,None,Dec 1998,J11,Blossom,died,None,Dec 1998,0
+J11UnnamedCalf,None,None,Dec 1998,J11,Blossom,died,None,Dec 1998,0
 L93,Nerka,Female,1995,L27,Ophelia,last seen,None,1998,3
 L38,Dylan,Male,1965,None,None,last seen,None,1998,33
 L44,Leo,Male,1974,L32,Olympia,last seen,None,1998,24
