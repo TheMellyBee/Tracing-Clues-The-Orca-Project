@@ -22,7 +22,7 @@ def add_report(connection, date, report):
     full_date = date.strftime("%B %d, %Y")
     query = '''
                 MATCH (d:Day {date: '%s'})
-                MERGE (s:Sighting {full_text: "%s", processed: 'no'})
+                MERGE (s:Report {full_text: "%s", processed: 'no'})
                 MERGE (s)-[:ON]->(d)
             ''' % (full_date, report)
     connection.query(query)
