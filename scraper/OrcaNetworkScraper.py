@@ -2,6 +2,7 @@ import datetime
 import requests
 import re
 import pandas as pd
+import numpy as np
 
 from bs4 import BeautifulSoup
 from datetime import date
@@ -36,25 +37,34 @@ def scrap_archival_page(archival_date):
 
     divTag = soup.find("div")
 
-    pattern = r"<br>||</br>"
+    pattern = r"<br>||</br>||<b>||</br>||<center>||</center>||<font.*>||</font>"
     cleanUpDiv = re.sub(pattern, "", divTag.getText())
     textOnly = re.sub('\n', ' ', cleanUpDiv)
     textOnly = re.sub("'", "\'", textOnly)
     textOnly = re.sub('"', '\\"', textOnly)
     textOnly = re.sub(
-        'Clip Map to enlarge    Map © 2005 used with permission byAdvanced Satellite Productions, Inc.', '',
+        "Click Map to enlarge   Map .* used with permission byAdvanced Satellite Productions, Inc.", '',
+        textOnly)
+    textOnly = re.sub(
+        "Click here for Map of .* whale sightings.", '',
         textOnly)
     textOnly = textOnly.strip()
 
     month = archival_date.strftime("%B")
     year = archival_date.strftime("%Y")
-    searchPattern = re.compile(month + " \d{1,2}, " + year)
+    searchPattern = re.compile(month + " \d{1,2}")
     splitList = re.split(searchPattern, textOnly)
     splitList = splitList[1:]
     mapFromDateToReport = dict()
 
-    for date, text in zip(re.findall(searchPattern, textOnly), splitList):
-        dateObject = parser.parse(date).date()
+
+    datelist = re.findall(searchPattern, textOnly)
+    datelist = [date + ", " + year for date in datelist]
+    unquieDates = np.unique(np.array(datelist)).tolist()
+    parsedDates = [parser.parse(uniqueDate).date() for uniqueDate in unquieDates]
+    parsedDates.sort()
+
+    for dateObject, text in zip(parsedDates, splitList):
         mapFromDateToReport[dateObject] = [i.strip() for i in text.split('*')]
 
     return mapFromDateToReport
