@@ -6,7 +6,7 @@ from graph_lib.add_report_and_date import add_time_line
 
 def import_births(connection):
     print("Reading in orca birth CSV..")
-    orca_births_df = pandas.read_csv("data/orca_birth.csv")
+    orca_births_df = pandas.read_csv("data/Orcas/orca_birth.csv")
 
     print("CSV loaded. Building query..")
     batching = 0
