@@ -16,6 +16,7 @@ def add_time_line(connection, curr_date):
                 MERGE (m)-[:MONTH_IN]->(y)
              ''' % (year, year_month, month, month_number, full_date, day_name, day)
     connection.query(query)
+    return full_date
 
 
 def add_report(connection, date, report):
