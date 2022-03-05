@@ -26,8 +26,9 @@ def import_sal_and_temp(connection):
         create_temp_sal_query(connection, row, data_set_title)
         batching += 1
 
-        if batching % 10 == 0:
-            print("10 queries finished.")
+        if batching % 100 == 0:
+            print(index + " queries finished.")
+            return
 
     print("All queries finished.")
 
@@ -68,7 +69,6 @@ def create_uw_citation(connection):
     query_builder += "MERGE (p)<-[:PRIMARY_INVESTIGATOR]-(data)\n"
     query_builder += "MERGE (lab)<-[:GATHERED_AT]-(data)\n"
 
-
     # Submit query
     connection.query(query_builder)
     print("Citation successful")
@@ -80,7 +80,7 @@ def create_temp_sal_query(connection, row, data_set_title):
     # merge a date ontology
     measurement_date = row['Date']
     full_date = add_time_line(connection, measurement_date)
-    query_builder = "MATCH (day:Day {date: '%s'})\n" % (full_date)
+    query_builder = "MATCH (day:Day {date: '%s'})\n" % full_date
 
     # connect location
     address = set_location(connection, row['Latitude'], row['Longitude'])
@@ -92,21 +92,20 @@ def create_temp_sal_query(connection, row, data_set_title):
     # create source of report and organization
     query_builder += "WITH day, loc, data\n"
 
-    # create the measurement node
-    query_builder += "CREATE (m:Measurement)\n"
-
     # create nodes for the different tests (this is for easier querying
     if not pd.isnull(row["Temperature"]):
-        query_builder += "CREATE (temp:WaterTemperature {value:%s, unit:'%s'})\n" % (row["Temperature"], "C")
+        query_builder += "CREATE (temp:Measurement:WaterTemperature {value:%s, unit:'%s'})\n" % (
+        row["Temperature"], "C")
+        query_builder += "CREATE (data)-[:MEASURES]->(temp)\n"
+        query_builder += "CREATE (temp)-[:TAKEN_ON {timestamp:'%s'}]->(day)\n" % (
+            measurement_date.strftime("%Y-%m-%d %H:%m"))
+        query_builder += "MERGE (temp)-[:TAKEN_AT]->(loc)\n"
     elif not pd.isnull(row["Temperature"]):
-        query_builder += "CREATE (sal:Salinity {value:%s, unit:'%s'})\n" % (row["Salinity"], "PSU")
-
-    # connect nodes
-    query_builder += "MERGE (m)-[:TAKEN_ON]->(day)\n"
-    query_builder += "MERGE (m)-[:TAKEN_AT]->(loc)\n"
-    query_builder += "MERGE (m)-[:ELEMENT_OF]->(data)\n"
-    query_builder += "MERGE (m)-[:COLLECTS]->(temp)\n"
-    query_builder += "MERGE (m)-[:COLLECTS]->(sal)\n"
+        query_builder += "CREATE (sal:Measurement:Salinity {value:%s, unit:'%s'})\n" % (row["Salinity"], "PSU")
+        query_builder += "CREATE (data)-[:MEASURES]->(sal)\n"
+        query_builder += "CREATE (sal)-[:TAKEN_ON {timestamp:'%s'}]->(day)\n" % (
+            measurement_date.strftime("%Y-%m-%d %H:%m"))
+        query_builder += "MERGE (sal)-[:TAKEN_AT]->(loc)\n"
 
     # send the query
     connection.query(query_builder)
