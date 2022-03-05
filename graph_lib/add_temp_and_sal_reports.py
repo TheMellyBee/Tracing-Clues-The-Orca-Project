@@ -1,5 +1,4 @@
 import pandas as pd
-from datetime import date
 from dateutil import parser
 from graph_lib.add_report_and_date import add_time_line
 from graph_lib.location_queries import set_location
