@@ -6,12 +6,13 @@ def get_geolocater():
     return geolocator
 
 
-def set_location(connection, coordinates):
+def set_location(connection, lat, long):
     geolocator = get_geolocater()
-    location = geolocator.geocode(coordinates)
+    cordinates = str(lat) + "," + str(long)
+    location = geolocator.reverse(cordinates)
 
-    query = "MERGE (l:Location {address:'%s'\n" % (location.raw['address'])
-    query += "set l.latitude = " + location.latitude + "\n"
-    query += "set l.longitude = " + location.longitude + "\n"
+    query = "MERGE (l:Location {address:'%s'})\n" % (location.address)
+    query += "set l.latitude = " + str(lat) + "\n"
+    query += "set l.longitude = " + str(long) + "\n"
     connection.query(query)
-    return location.raw['address']
+    return location.address
