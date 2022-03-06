@@ -28,7 +28,6 @@ def import_sal_and_temp(connection):
 
         if batching % 100 == 0:
             print(index + " queries finished.")
-            return
 
     print("All queries finished.")
 
