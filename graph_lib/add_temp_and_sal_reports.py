@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import datetime
 from dateutil import parser
 from graph_lib.add_report_and_date import add_time_line
 from graph_lib.location_queries import set_location
@@ -27,7 +28,7 @@ def import_sal_and_temp(connection):
         batching += 1
 
         if batching % 100 == 0:
-            print(index + " queries finished.")
+            print(str(index) + " queries finished.")
 
     print("All queries finished.")
 
@@ -78,6 +79,10 @@ def create_uw_citation(connection):
 def create_temp_sal_query(connection, row, data_set_title):
     # merge a date ontology
     measurement_date = row['Date']
+    last_save_measurement = parser.parse("b 2014-04-17 08:04")
+    if measurement_date.to_pydatetime() <= last_save_measurement:
+        return
+
     full_date = add_time_line(connection, measurement_date)
     query_builder = "MATCH (day:Day {date: '%s'})\n" % full_date
 
@@ -91,7 +96,7 @@ def create_temp_sal_query(connection, row, data_set_title):
     # create source of report and organization
     query_builder += "WITH day, loc, data\n"
 
-    # create nodes for the different tests (this is for easier querying
+    #create nodes for the different tests (this is for easier querying
     if not pd.isnull(row["Temperature"]):
         query_builder += "CREATE (temp:Measurement:WaterTemperature {value:%s, unit:'%s'})\n" % (
         row["Temperature"], "C")
@@ -99,7 +104,8 @@ def create_temp_sal_query(connection, row, data_set_title):
         query_builder += "CREATE (temp)-[:TAKEN_ON {timestamp:'%s'}]->(day)\n" % (
             measurement_date.strftime("%Y-%m-%d %H:%m"))
         query_builder += "MERGE (temp)-[:TAKEN_AT]->(loc)\n"
-    elif not pd.isnull(row["Temperature"]):
+
+    if not pd.isnull(row["Salinity"]):
         query_builder += "CREATE (sal:Measurement:Salinity {value:%s, unit:'%s'})\n" % (row["Salinity"], "PSU")
         query_builder += "CREATE (data)-[:MEASURES]->(sal)\n"
         query_builder += "CREATE (sal)-[:TAKEN_ON {timestamp:'%s'}]->(day)\n" % (
